@@ -78,6 +78,7 @@
 
     google-chrome
     zed-editor
+    sparkle
   ];
 
   # Git 配置
