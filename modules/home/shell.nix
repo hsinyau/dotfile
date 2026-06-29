@@ -31,7 +31,7 @@
     enableCompletion = true;
 
     # 环境变量与别名
-    initExtra = ''
+    initContent = ''
       export PATH="/home/hsinyau/.bun/bin:$PATH"
     '';
 
