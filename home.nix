@@ -8,56 +8,41 @@
   # 将当前配置目录中的文件导入 Nix store，并在 Home 目录下生成指向该 store 文件的符号链接
   # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
 
-  # 将 scripts 目录导入 Nix store，并在 Home 目录下递归生成指向 store 中的文件的符号链接
-  # home.file.".config/i3/scripts" = {
-  #   source = ./scripts;
-  #   recursive = true;   # 递归整个文件夹
-  #   executable = true;  # 将其中所有文件添加「执行」权限
-  # };
-
-  # 直接以 text 的方式，在 nix 配置文件中硬编码文件内容
-  # home.file.".xxx".text = ''
-  #     xxx
-  # '';
-
   # 设置鼠标指针大小以及字体 DPI（适用于 4K 显示器）
   xresources.properties = {
     "Xcursor.size" = 16;
     "Xft.dpi" = 172;
   };
 
-  # 通过 home.packages 安装一些常用的软件
-  # 这些软件将仅在当前用户下可用，不会影响系统级别的配置
-  # 建议将所有 GUI 软件，以及与 OS 关系不大的 CLI 软件，都通过 home.packages 安装
+  # 通过 home.packages 安装用户级软件包（仅当前用户可用）
   home.packages = with pkgs;[
-    # 如下是我常用的一些命令行工具，你可以根据自己的需要进行增删
     neofetch
-    nnn # terminal file manager
+    nnn # 终端文件管理器
 
-    # archives
+    # 压缩 / 归档工具
     zip
     xz
     unzip
     p7zip
 
-    # utils
-    ripgrep # recursively searches directories for a regex pattern
-    jq # A lightweight and flexible command-line JSON processor
-    yq-go # yaml processor https://github.com/mikefarah/yq
-    eza # A modern replacement for ‘ls’
-    fzf # A command-line fuzzy finder
+    # 实用工具
+    ripgrep # 递归搜索文件内容
+    jq      # JSON 命令行处理器
+    yq-go   # YAML 处理器
+    eza     # ls 的现代替代品
+    fzf     # 命令行模糊搜索
 
-    # networking tools
-    mtr # A network diagnostic tool
+    # 网络工具
+    mtr     # 网络诊断
     iperf3
-    dnsutils  # `dig` + `nslookup`
-    ldns # replacement of `dig`, it provide the command `drill`
-    aria2 # A lightweight multi-protocol & multi-source command-line download utility
-    socat # replacement of openbsd-netcat
-    nmap # A utility for network discovery and security auditing
-    ipcalc  # it is a calculator for the IPv4/v6 addresses
+    dnsutils  # dig + nslookup
+    ldns      # drill（dig 的替代品）
+    aria2     # 多协议命令行下载工具
+    socat     # netcat 的替代品
+    nmap      # 网络扫描
+    ipcalc    # IPv4/v6 地址计算器
 
-    # misc
+    # 杂项
     cowsay
     file
     which
@@ -68,48 +53,45 @@
     zstd
     gnupg
 
-    # nix related
-    #
-    # it provides the command `nom` works just like `nix`
-    # with more details log output
-    nix-output-monitor
+    # Nix 相关
+    nix-output-monitor  # nom 命令，提供更详细的 nix 构建日志
 
-    # productivity
-    hugo # static site generator
-    glow # markdown previewer in terminal
+    # 效率工具
+    hugo  # 静态站点生成器
+    glow  # 终端 Markdown 预览
 
-    btop  # replacement of htop/nmon
-    iotop # io monitoring
-    iftop # network monitoring
+    btop  # 系统监控（htop/nmon 的替代品）
+    iotop # I/O 监控
+    iftop # 网络流量监控
 
-    # system call monitoring
-    strace # system call monitoring
-    ltrace # library call monitoring
-    lsof # list open files
+    # 系统调用监控
+    strace
+    ltrace
+    lsof
 
-    # system tools
+    # 系统工具
     sysstat
-    lm_sensors # for `sensors` command
+    lm_sensors  # sensors 命令
     ethtool
-    pciutils # lspci
-    usbutils # lsusb
-    
+    pciutils    # lspci
+    usbutils    # lsusb
+
     google-chrome
+    zed-editor
   ];
 
-  # git 相关配置
+  # Git 配置
   programs.git = {
     enable = true;
-    settings.user = {    
+    settings.user = {
       name = "hsinyau";
       email = "hsinyau@qq.com";
     };
   };
 
-  # 启用 starship
+  # Starship 提示符
   programs.starship = {
     enable = true;
-    # 自定义配置
     settings = {
       add_newline = false;
       aws.disabled = true;
@@ -118,10 +100,9 @@
     };
   };
 
-  # alacritty - 一个跨平台终端，带 GPU 加速功能
+  # Alacritty 终端（GPU 加速）
   programs.alacritty = {
     enable = true;
-    # 自定义配置
     settings = {
       env.TERM = "xterm-256color";
       font = {
@@ -133,22 +114,21 @@
     };
   };
 
+  # Bash 配置
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    # TODO 在这里添加你的自定义 bashrc 内容
     bashrcExtra = ''
-      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+      export PATH="/home/hsinyau/.bun/bin:$PATH"
     '';
 
-    # TODO 设置一些别名方便使用，你可以根据自己的需要进行增删
+    # 别名
     shellAliases = {
-      k = "kubectl";
-      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
-      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
+      d = "bun run dev";
     };
   };
-  
+
+  # GNOME 桌面设置
   dconf.settings = {
     "org/gnome/desktop/wm/preferences" = {
       button-layout = ":minimize,maximize,close";
@@ -157,13 +137,6 @@
     };
   };
 
-  # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
-  # when a new Home Manager release introduces backwards
-  # incompatible changes.
-  #
-  # You can update Home Manager without changing this value. See
-  # the Home Manager release notes for a list of state version
-  # changes in each release.
+  # Home Manager 状态版本（首次配置时的版本，不要随意更改）
   home.stateVersion = "25.11";
 }

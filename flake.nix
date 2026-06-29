@@ -3,38 +3,30 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    
-    # home-manager, used for managing user configuration
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
-      # The `follows` keyword in inputs is used for inheritance.
-      # Here, `inputs.nixpkgs` of home-manager is kept consistent with
-      # the `inputs.nixpkgs` of the current flake,
-      # to avoid problems caused by different versions of nixpkgs.
+      # 保持 home-manager 与当前 flake 使用相同版本的 nixpkgs，避免依赖冲突
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
   };
 
   outputs = inputs@{ nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
-      # 这里的 OvO 替换成 Hostname
       OvO = nixpkgs.lib.nixosSystem {
         modules = [
           ./configuration.nix
 
-          # 将 home-manager 配置为 nixos 的一个 module
-          # 这样在 nixos-rebuild switch 时，home-manager 配置也会被自动部署
+          # 将 home-manager 作为 NixOS 模块导入，使其在 nixos-rebuild 时自动部署
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            # 这里的 hsinyau 替换成用户名
+            # 配置用户 hsinyau 的 home-manager
             home-manager.users.hsinyau = import ./home.nix;
 
-            # 使用 home-manager.extraSpecialArgs 自定义传递给 ./home.nix 的参数
-            # 取消注释下面这一行，就可以在 home.nix 中使用 flake 的所有 inputs 参数了
+            # 如需在 home.nix 中使用 flake 的全部 inputs，取消下一行注释
             # home-manager.extraSpecialArgs = inputs;
           }
         ];
