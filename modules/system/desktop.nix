@@ -19,5 +19,5 @@
   services.printing.enable = true;
 
   # 系统概览汉化
-  services.gnome.core-utilities.enable = true;
+  services.gnome.core-apps.enable = true;
 }

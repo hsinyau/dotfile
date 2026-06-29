@@ -3,7 +3,7 @@
 
 {
   # 显卡驱动：NVIDIA 专有驱动
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
   };
 
