@@ -129,9 +129,15 @@
     };
   };
 
-  # GNOME 桌面设置
+  # GNOME 桌面字体与窗口设置
   dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      font-name = "Sarasa UI SC 10";
+      document-font-name = "Sarasa UI SC 11";
+      monospace-font-name = "Sarasa Mono SC 10";
+    };
     "org/gnome/desktop/wm/preferences" = {
+      titlebar-font = "Sarasa UI SC Bold 10";
       button-layout = ":minimize,maximize,close";
       action-double-click-titlebar = "toggle-maximize";
       action-middle-click-titlebar = "minimize";

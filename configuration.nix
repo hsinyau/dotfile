@@ -45,8 +45,9 @@
     ];
   };
 
-  # 启用 X11
+  # 启用 X11（NVIDIA 驱动）
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # 桌面环境：GNOME + GDM
   services = {
@@ -73,6 +74,40 @@
     pulse.enable = true;
   };
 
+  # 显卡驱动：NVIDIA 专有驱动
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+  };
+
+  hardware.nvidia = {
+    # 内核态模式设置（KMS），Wayland 必需
+    modesetting.enable = true;
+
+    # 电源管理（笔记本省电）
+    powerManagement.enable = true;
+
+    # 使用闭源 NVIDIA 驱动（而非开源 nvk）
+    open = false;
+
+    # 安装 nvidia-settings 配置工具
+    nvidiaSettings = true;
+
+    # 使用稳定版驱动
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  # 字体：安装更纱黑体并设为系统默认
+  fonts.packages = with pkgs; [
+    sarasa-gothic
+  ];
+
+  fonts.fontconfig.defaultFonts = {
+    sansSerif = [ "Sarasa UI SC" ];
+    monospace = [ "Sarasa Mono SC" ];
+    serif = [ "Sarasa UI SC" ];
+  };
+
   # 用户账户
   users.users.hsinyau = {
     isNormalUser = true;
@@ -81,6 +116,8 @@
     packages = with pkgs; [
     ];
   };
+
+
 
   programs.firefox.enable = true;
 
@@ -98,6 +135,9 @@
 
   # 系统状态版本（首次安装时的版本，不要随意更改）
   system.stateVersion = "25.11";
+
+  # 系统概览汉化
+  services.gnome.core-utilities.enable = true;
 
   # 启用 Flakes 与新式 nix 命令行工具
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
