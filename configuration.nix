@@ -77,7 +77,6 @@
   # 显卡驱动：NVIDIA 专有驱动
   hardware.opengl = {
     enable = true;
-    driSupport = true;
   };
 
   hardware.nvidia = {
@@ -113,9 +112,12 @@
     isNormalUser = true;
     description = "hsinyau";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
     packages = with pkgs; [
     ];
   };
+
+  programs.zsh.enable = true;
 
 
 
@@ -129,7 +131,6 @@
     git
     vim
     wget
-    google-chrome
     bun
   ];
 
