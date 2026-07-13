@@ -20,4 +20,7 @@
 
   # 系统概览汉化
   services.gnome.core-apps.enable = true;
+
+  # flatpak
+  services.flatpak.enable = true;
 }
