@@ -7,6 +7,7 @@
     ./modules/home/packages.nix
     ./modules/home/git.nix
     ./modules/home/desktop.nix
+    ./modules/home/ssh.nix
   ];
 
   home.username = "hsinyau";
