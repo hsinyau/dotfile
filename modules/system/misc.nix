@@ -10,6 +10,9 @@
     bun
   ];
 
+  # nix-ld：为非 Nix 动态链接的可执行文件提供运行环境
+  programs.nix-ld.enable = true;
+
   # Firefox
   programs.firefox.enable = true;
 
