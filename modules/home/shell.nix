@@ -191,10 +191,20 @@
     # 环境变量与别名
     initContent = ''
       export PATH="/home/hsinyau/.bun/bin:$PATH"
+
+      # Go
+      export GOPATH="$HOME/go"
+      export GOBIN="$GOPATH/bin"
+      export PATH="$GOBIN:$PATH"
+
+      # Rust（rustup 会自动管理 ~/.cargo/bin）
+      # 如果你使用 rustup 默认安装，以下通常已是自动的
+      # export PATH="$HOME/.cargo/bin:$PATH"
     '';
 
     shellAliases = {
       d = "bun run dev";
+      i = "cd ~/Workspace";
     };
   };
 
@@ -204,9 +214,15 @@
     enableCompletion = true;
     bashrcExtra = ''
       export PATH="/home/hsinyau/.bun/bin:$PATH"
+
+      # Go
+      export GOPATH="$HOME/go"
+      export GOBIN="$GOPATH/bin"
+      export PATH="$GOBIN:$PATH"
     '';
     shellAliases = {
       d = "bun run dev";
+      i = "cd ~/Workspace";
     };
   };
 }

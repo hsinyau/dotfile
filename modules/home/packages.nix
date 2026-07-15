@@ -3,6 +3,13 @@
 
 {
   home.packages = with pkgs; [
+    # ── 开发语言与工具链 ──────────────────────────
+    nodejs          # Node.js（当前 Nixpkgs 中的默认版本）
+    nodePackages.pnpm  # 快速、节省磁盘空间的包管理器
+    go              # Go 语言
+    rustup          # Rust 工具链安装器（用于管理 rustc / cargo 等）
+
+    # ── 原有内容 ──────────────────────────────────
     neofetch
     nnn # 终端文件管理器
 
@@ -66,5 +73,10 @@
     google-chrome
     zed-editor
     sparkle
+
+    # 开发语言相关工具（末尾放置，便于查看）
+    gopls           # Go 语言 LSP 服务器
+    delve           # Go 调试器
+    # rust-analyzer 由 rustup 自带，无需单独安装
   ];
 }
