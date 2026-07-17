@@ -2,6 +2,7 @@
   description = "Hsinyau's NixOS flake";
 
   inputs = {
+    # 使用 GitHub 官方源，通过 binary cache（TUNA 镜像）加速下载构建产物
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     home-manager = {
