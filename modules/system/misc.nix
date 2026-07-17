@@ -8,15 +8,19 @@
     # 启用 Flakes 与新式 nix 命令行工具
     experimental-features = [ "nix-command" "flakes" ];
 
-    # 主 binary cache（使用清华 TUNA 镜像，官方的作为回退）
+    # 主 binary cache（国内镜像源在前优先尝试，官方的作为最终回退）
     substituters = [
       "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+      "https://mirrors.ustc.edu.cn/nix-channels/store"
+      "https://mirrors.sjtug.sjtu.edu.cn/nix-channels/store"
       "https://cache.nixos.org"
     ];
 
     # 对镜像源给予更高的信任权重
     trusted-substituters = [
       "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+      "https://mirrors.ustc.edu.cn/nix-channels/store"
+      "https://mirrors.sjtug.sjtu.edu.cn/nix-channels/store"
     ];
 
     # 公共 substituters 的公钥
