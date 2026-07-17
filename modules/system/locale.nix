@@ -33,5 +33,10 @@
         ];
       })
     ];
+    fcitx5.settings.addons = {
+      classicui = {
+        globalSection.Theme = "FluentDark";
+      };
+    };
   };
 }
