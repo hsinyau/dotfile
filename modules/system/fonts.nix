@@ -4,6 +4,8 @@
 {
   fonts.packages = with pkgs; [
     sarasa-gothic
+    jetbrains-mono
+    nerd-fonts.fira-code
   ];
 
   fonts.fontconfig.defaultFonts = {

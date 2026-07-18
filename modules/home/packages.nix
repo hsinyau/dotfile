@@ -73,6 +73,7 @@
     google-chrome
     zed-editor
     sparkle
+    ghostty
 
     # 开发语言相关工具（末尾放置，便于查看）
     gopls           # Go 语言 LSP 服务器
