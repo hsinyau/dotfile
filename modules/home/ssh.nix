@@ -35,13 +35,6 @@
       ServerAliveCountMax 3
   '';
 
-  # 自动启动 ssh-agent（某些桌面环境可能不会自动启动）
-  systemd.user.services.ssh-agent = {
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
-    Service = {
-      ExecStart = "${pkgs.openssh}/bin/ssh-agent -D";
-    };
-  };
+  # 自动启动 ssh-agent
+  services.ssh-agent.enable = true;
 }

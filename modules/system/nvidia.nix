@@ -54,8 +54,8 @@
 
   # ── 环境变量：优化 Chrome 等应用的 GPU 渲染 ──────
   environment.sessionVariables = {
-    # 告诉 Chrome/Electron 应用使用 NVIDIA 的 Vulkan 实现
-    NVD_BACKEND = "direct";
+    # 告诉 Chrome/Electron 应用使用 Wayland 后端
+    NIXOS_OZONE_WL = "1";
     # 对部分 Electron 应用（如 VSCode、Zed）有用
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     # 确保 X11 应用不误用软件渲染

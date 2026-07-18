@@ -5,14 +5,14 @@
   # 设置鼠标指针大小以及字体 DPI（适用于 4K 显示器）
   xresources.properties = {
     "Xcursor.size" = 16;
-    "Xft.dpi" = 172;
+    "Xft.dpi" = 144;
   };
 
   # Ghostty 终端配置
   home.file.".config/ghostty/config".text = ''
     # ====================== 字体 ======================
     font-family = FiraCode Nerd Font
-    font-size = 14
+    font-size = 12
     font-thicken = true
 
     # ====================== 主题 ======================

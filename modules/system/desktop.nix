@@ -19,7 +19,7 @@
   services.printing.enable = true;
 
   # 系统概览汉化
-  services.gnome.core-apps.enable = true;
+  services.gnome.core-utilities.enable = true;
 
   # flatpak
   services.flatpak.enable = true;
